@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Pajaritos123",
+    "password": "NuevaContraseña123",
     "database": "american_butterflies",
     "host": "127.0.0.1",
     "dialect": "mysql"
