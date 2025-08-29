@@ -6,6 +6,7 @@ export const getAllButterflies = async (req, res) => {
     const butterflies = await Butterfly.findAll();
     res.json(butterflies);
   } catch (error) {
+    console.error("Error Sequelize en getAllButterflies:", error);
     res.status(500).json({ error: "Error al obtener mariposas" });
   }
 };
@@ -21,6 +22,7 @@ export const getById = async (req, res) => {
 
     res.json(butterfly);
   } catch (error) {
+    console.error("Error Sequelize en getById:", error);
     res.status(500).json({ error: "Error al obtener mariposa" });
   }
 };
