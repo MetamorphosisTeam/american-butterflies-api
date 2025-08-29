@@ -1,5 +1,4 @@
-// config/db.js
-const { Sequelize } = require('sequelize');
+import { Sequelize } from "sequelize";
 
 // Configura la conexión a tu base de datos
 const sequelize = new Sequelize('american_butterflies', 'root', 'Pajaritos123', {
@@ -7,4 +6,4 @@ const sequelize = new Sequelize('american_butterflies', 'root', 'Pajaritos123', 
   dialect: 'mysql'
 });
 
-module.exports = sequelize;
+export default sequelize;
