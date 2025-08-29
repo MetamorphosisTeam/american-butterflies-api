@@ -1,5 +1,6 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db_connection.js'); // Ajusta la ruta a tu archivo de conexión
+import { DataTypes } from 'sequelize';
+import sequelize from '../database/db_connection.js';
+
 
 const Butterfly = sequelize.define('Butterfly', {
   // Sequelize asume 'id' por defecto, pero lo definimos para claridad
@@ -60,4 +61,4 @@ const Butterfly = sequelize.define('Butterfly', {
   underscored: true // Mapea campos como `createdAt` a `created_at` en la BBDD
 });
 
-module.exports = Butterfly;
+export default Butterfly;
