@@ -25,13 +25,16 @@ export const ButterflyValidator = [
             }
             return true;
         })
-        .trim(),
+        .trim()
+        .escape(),
 
     // 2. Validación para 'order': opcional, ya que es de solo lectura en el form.
     check('order', 'El orden debe ser texto.')
         .optional({ checkFalsy: true })
-        .isString()
-        .trim(),
+        .isIn(["Lepidoptera"])
+        .withMessage('El orden debe ser "Lepidoptera".')
+        .trim()
+        .escape(),
 
     // 3. Validación para 'family': campo obligatorio (viene de un <select>).
     check('family')
@@ -40,24 +43,29 @@ export const ButterflyValidator = [
         .bail()
         .isString()
         .withMessage('La familia debe ser texto.')
-        .trim(),
+        .trim()
+        .escape(),
 
     // 4. Validación para 'img': opcional, pero si existe debe ser una URL de imagen válida.
     check('img')
         .optional({ checkFalsy: true })
-        .isURL()
-        .withMessage('La URL de la imagen no es válida.')
-        .bail()
-        .matches(/\.(jpg|jpeg|png|webp|gif)$/i)
-        .withMessage('La URL debe terminar en .jpg, .jpeg, .png, .webp o .gif'),
+        .custom((value) => {
+            if (!/^https?:\/\/.*\.(jpg|jpeg|png|webp|gif)$/i.test(value)) {
+                throw new Error('Debe ser una URL válida y terminar en .jpg, .jpeg, .png, .webp o .gif');
+            }
+            return true;
+        })
+        .trim()
+        .escape(),
 
     // 5. Validación genérica para los campos de texto opcionales (textareas).
     ...['origin', 'location', 'color', 'size', 'fenology', 'cycle', 'habitat', 'plants'].map(field =>
-        check(field)
-            .optional({ checkFalsy: true })
-            .isString()
-            .trim()
-            .isLength({ min: 4, max: 500 })
-            .withMessage(`El campo '${field}' debe tener entre 4 y 500 caracteres.`)
-    ),
+            check(field)
+                .optional({ checkFalsy: true })
+                .isString()
+                .isLength({ min: 4, max: 500 })
+                .withMessage(`El campo '${field}' debe tener entre 4 y 500 caracteres.`)
+                .trim()
+                .escape()
+        ),
 ];
