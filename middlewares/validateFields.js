@@ -1,25 +1,29 @@
 
-const { validationResult } = require('express-validator');
+import { validationResult } from 'express-validator';
 
-//Función Middleware, quien revisa y deja pasar al controlador
-const  validateFields = (req, res, next) => { //(req, res, next) parametros estandar del middleware de Express
+/**
+ * Middleware que revisa los errores de validación generados por express-validator.
+ * Si encuentra errores, detiene la cadena y responde con un error 400.
+ * Si no hay errores, continúa al siguiente middleware o controlador.
+ * @param {import('express').Request} req - El objeto de solicitud de Express.
+ * @param {import('express').Response} res - El objeto de respuesta de Express.
+ * @param {import('express').NextFunction} next - La función para pasar al siguiente middleware.
+ */
+export const validateFields = (req, res, next) => {
     const errors = validationResult(req);
-    
-    if (!errors.isEmpty()) { //Si hay errores devuelve la res error(400)
+
+    if (!errors.isEmpty()) {
         return res.status(400).json({
-            success: false,
-            message: 'Error de validación',
+            ok: false,
             errors: errors.array().map(error => ({
-                field: error.path, //campo que fallo (ej:'nombre de la mariposa')
+                path: error.path, //campo que fallo (ej:'nombre de la mariposa')
                 value: error.value, //valor que se envió (ej: 'abeja reina')
-                message: error.msg, //mensaje de error personalizado
+                msg: error.msg, //mensaje de error personalizado
                 location: error.location // donde esta el campo del error ('body', 'params', 'query')
             }))
         });
     }
-    console.log('Validación exitosa para:', `${req.method} ${req.path}`)
-    next();// no encuentra errores avanza al siguiente middleware-> controlador
-}
-//para sanitizar debo definir las reglas en los validadores
-
-module.exports = { validateFields };
+    //para sanitizar debo definir las reglas en los validadores
+    console.log(`Validación exitosa para: ${req.method} ${req.originalUrl}`); // no encuentra errores avanza al siguiente middleware-> controlador
+    next();
+};
