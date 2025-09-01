@@ -5,3 +5,10 @@ node_modules
 **/.DS_Store
 .DS_Store?
 ._*
+
+# Variables de entorno
+.env
+.env.local
+.env.development
+.env.production
+test-env.js
