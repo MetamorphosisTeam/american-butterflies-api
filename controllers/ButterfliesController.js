@@ -22,9 +22,7 @@ export const createButterfly = async (req, res) => {
             data: newButterfly
         });
     } catch (error) {
-        res.status(500).json({
-            ok: false,
-            message: error.message });
+        res.json({ message: error.message });
     }
 }
 
