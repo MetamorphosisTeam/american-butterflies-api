@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db_connection from "../database/db_connection.js";
 
-const Butterfly = db_connection.define('Butterfly', {
+const ButterfliesModel = db_connection.define('butterflies', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -59,4 +59,4 @@ const Butterfly = db_connection.define('Butterfly', {
   underscored: true // Mapea campos como `createdAt` a `created_at` en la BBDD
 });
 
-module.exports = Butterfly;
+export default ButterfliesModel;

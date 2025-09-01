@@ -1,5 +1,5 @@
 import express from "express"
-//import bookRouter from "./routes/bookRoutes.js"
+import butterfliesRouter from "./routes/ButterfliesRoutes.js"
 import db_connection from "./database/db_connection.js"
 import ButterfliesModel from "./models/ButterfliesModel.js"
 
@@ -10,7 +10,7 @@ app.get ("/", (req, res)=> {
 })
 
 app.use(express.json())
-//app.use("/books", bookRouter)
+app.use("/butterflies", butterfliesRouter)
 
 try {
     await db_connection.authenticate()
