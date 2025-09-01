@@ -1,4 +1,4 @@
-import { check, param } from "express-validator";
+import { check } from "express-validator";
 
 /**
  * Define las reglas de validación y sanitización para los datos de una mariposa.

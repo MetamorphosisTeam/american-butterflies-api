@@ -1,23 +1,24 @@
 import  express  from "express";
-import { ButterflyValidator } from "../validators/butteflyValidators";
-import { validateFields } from "../middlewares/validateFields";
+import { ButterflyValidator } from "../validators/butterflyValidators.js";
+import { validateFields } from "../middlewares/validateFields.js";
 import { getAllButterflies, getOneButterfly, createButterfly, updateButterfly, deleteButterfly } from '../controllers/ButterfliesController.js'
 
-const ButterflyRouter = express.Router();
+const butterfliesRouter = express.Router();
 
 //getAllButerflies 
-ButterflyRouter.get("/", getAllButterflies)
+butterfliesRouter.get("/", getAllButterflies)
 
 //getOneButterfly
-ButterflyRouter.get("/:id", getOneButterfly)
+butterfliesRouter.get("/:id", getOneButterfly)
 
 //createButterfly
-ButterflyRouter.post("/", createButterfly, ButterflyValidator, validateFields)
+butterfliesRouter.post("/", createButterfly, ButterflyValidator, validateFields)
 
 //updateButterfly
-ButterflyRouter.put("/:id", updateButterfly)
+butterfliesRouter.put("/:id", updateButterfly)
 
 //deleteButterfly
-ButterflyRouter.delete("/:id", deleteButterfly)
+butterfliesRouter.delete("/:id", deleteButterfly)
 
-export default ButterflyRouter;
+
+export default butterfliesRouter;
