@@ -1,7 +1,7 @@
 
 import { Sequelize } from "sequelize";
 
-const db_connection = new Sequelize('american_butterflies','root','Pajaritos123',{
+const db_connection = new Sequelize('american_butterflies','root','54321',{
         host: 'localhost',
         dialect: 'mysql',
         define: {
