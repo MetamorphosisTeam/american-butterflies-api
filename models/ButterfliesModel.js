@@ -1,8 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db_connection.js'); // Ajusta la ruta a tu archivo de conexión
+import { DataTypes } from "sequelize";
+import db_connection from "../database/db_connection.js";
 
-const Butterfly = sequelize.define('Butterfly', {
-  // Sequelize asume 'id' por defecto, pero lo definimos para claridad
+const Butterfly = db_connection.define('Butterfly', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
