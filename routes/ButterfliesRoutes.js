@@ -12,7 +12,7 @@ butterfliesRouter.get("/", getAllButterflies)
 butterfliesRouter.get("/:id", getOneButterfly)
 
 //createButterfly
-butterfliesRouter.post("/", createButterfly, ButterflyValidator, validateFields)
+butterfliesRouter.post("/", ButterflyValidator, validateFields, createButterfly)
 
 //updateButterfly
 butterfliesRouter.put("/:id", updateButterfly)

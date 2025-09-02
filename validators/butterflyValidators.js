@@ -15,8 +15,8 @@ export const ButterflyValidator = [
         .withMessage('El nombre debe tener entre 5 y 100 caracteres.')
         .bail()
         // Regex mejorado para coincidir con el del frontend
-        .matches(/^[A-Za-zÁÉÍÓÚáéíóúüÜñÑ\s\(\)\.,-]+$/)
-        .withMessage('El nombre solo puede contener letras, espacios, guiones, comas, paréntesis y puntos.')
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúüÜñÑ\s().-]+$/)
+        .withMessage('El nombre solo puede contener letras, espacios, paréntesis, guiones y puntos.')
         .bail()
         .custom((value) => {
             const wordCount = value.trim().split(/\s+/).length;
