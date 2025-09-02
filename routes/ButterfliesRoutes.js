@@ -1,9 +1,21 @@
-import express from "express";
-import { getAllButterflies, getById } from "../controllers/ButterfliesController.js";
+import  express  from "express";
+import { ButterflyValidator } from "../validators/butterflyValidators.js";
+import { validateFields } from "../middlewares/validateFields.js";
+import { getAllButterflies, getById, createButterfly, updateButterfly, deleteButterfly } from '../controllers/ButterfliesController.js'
 
-const router = express.Router();
 
-router.get("/", getAllButterflies);
-router.get("/:id", getById);
+//Get
+butterfliesRouter.get("/", getAllButterflies);
+butterfliesRouter.get("/:id", getById);
 
-export default router;
+//createButterfly
+butterfliesRouter.post("/", createButterfly, ButterflyValidator, validateFields)
+
+//updateButterfly
+butterfliesRouter.put("/:id", updateButterfly)
+
+//deleteButterfly
+butterfliesRouter.delete("/:id", deleteButterfly)
+
+
+export default butterfliesRouter;

@@ -1,9 +1,7 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../database/db_connection.js';
+import { DataTypes } from "sequelize";
+import db_connection from "../database/db_connection.js";
 
-
-const Butterfly = sequelize.define('Butterfly', {
-  // Sequelize asume 'id' por defecto, pero lo definimos para claridad
+const ButterfliesModel = db_connection.define('butterflies', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -61,4 +59,4 @@ const Butterfly = sequelize.define('Butterfly', {
   underscored: true // Mapea campos como `createdAt` a `created_at` en la BBDD
 });
 
-export default Butterfly;
+export default ButterfliesModel;

@@ -1,27 +1,26 @@
-import express from "express";
-import cors from "cors";
-import db from "./database/db_connection.js";
-import butterfliesRoutes from "./routes/ButterfliesRoutes.js";
+import express from "express"
+import butterfliesRouter from "./routes/ButterfliesRoutes.js"
+import db_connection from "./database/db_connection.js"
+import ButterfliesModel from "./models/ButterfliesModel.js"
 
+export const app = express()
 
-const app = express();
+app.get ("/", (req, res)=> {
+    res.send("Hola API")
+})
 
-app.use(cors());
-app.use(express.json());
+app.use(express.json())
+app.use("/butterflies", butterfliesRouter)
 
-// Rutas
-app.use("/api/butterflies", butterfliesRoutes);
-
-// Conexión a BD (base de datos)
 try {
-  await db.authenticate();
-  console.log("Conexión a la base de datos exitosa");
+    await db_connection.authenticate()
+    console.log('conected to database🐱🚀')
+    await ButterfliesModel.sync({})
+    console.log('models syncronised✔')
 } catch (error) {
-  console.error("Error de conexión a la base de datos:", error);
+    console.log(`error: ${error}`)
 }
 
-// Iniciar servidor
-const PORT = 4000;
-app.listen(4000, () => {
-  console.log("Servidor corriendo en http://localhost:4000");
-});
+export const server = app.listen(8000, () => {
+    console.log('🚀server up in http://localhost:8000/')
+})
