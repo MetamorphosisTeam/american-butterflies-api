@@ -45,113 +45,145 @@ const ButterfliesModel = db_connection.define(
           msg: "El orden debe ser Lepidoptera",
         },
       },
-      family: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "La familia es obligatoria",
-          },
+    },
+    family: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "La familia es obligatoria",
         },
       },
-      color: {
-        type: DataTypes.STRING(150),
-        allowNull: false,
-        validate: {
-          len: {
-            args: [4, 150],
-            msg: "El color debe tener entre 4 y 150 caracteres",
-          },
+    },
+    color: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+      validate: {
+        len: {
+          args: [4, 150],
+          msg: "El color debe tener entre 4 y 150 caracteres",
         },
       },
-      size: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-        validate: {
-          len: {
-            args: [2, 20],
-            msg: "El tamaño debe tener entre 2 y 20 caracteres",
-          },
+    },
+    size: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      validate: {
+        len: {
+          args: [2, 20],
+          msg: "El tamaño debe tener entre 2 y 20 caracteres",
         },
       },
-      origin: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        validate: {
-          len: {
-            args: [4, 100],
-            msg: "El origen debe tener entre 4 y 100 caracteres",
-          },
+    },
+    origin: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      validate: {
+        len: {
+          args: [4, 100],
+          msg: "El origen debe tener entre 4 y 100 caracteres",
         },
       },
-      location: {
-        type: DataTypes.STRING(200),
-        allowNull: false,
-        validate: {
-          len: {
-            args: [4, 200],
-            msg: "La ubicación debe tener entre 4 y 200 caracteres",
-          },
+    },
+    location: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      validate: {
+        len: {
+          args: [4, 200],
+          msg: "La ubicación debe tener entre 4 y 200 caracteres",
         },
       },
-      habitat: {
-        type: DataTypes.TEXT,
-        validate: {
-          len: {
-            args: [0, 500],
-            msg: "El hábitat no puede exceder 500 caracteres",
-          },
+    },
+    habitat: {
+      type: DataTypes.TEXT,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: "El hábitat no puede exceder 500 caracteres",
         },
       },
-      plants: {
-        type: DataTypes.TEXT,
-        validate: {
-          len: {
-            args: [0, 500],
-            msg: "Las plantas no pueden exceder 500 caracteres",
-          },
+    },
+    plants: {
+      type: DataTypes.TEXT,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: "Las plantas no pueden exceder 500 caracteres",
         },
       },
-      cycle: {
-        type: DataTypes.TEXT,
-        validate: {
-          len: {
-            args: [0, 500],
-            msg: "El ciclo no puede exceder 500 caracteres",
-          },
+    },
+    cycle: {
+      type: DataTypes.TEXT,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: "El ciclo no puede exceder 500 caracteres",
         },
       },
-      img: {
-        type: DataTypes.STRING(500),
-        validate: {
-          isUrl: {
-            msg: "Debe ser una URL válida",
-          },
-          isImageUrl(value) {
-            if (value && !/\.(jpg|jpeg|png|webp|gif)$/i.test(value)) {
-              throw new Error(
-                "La URL debe terminar en .jpg, .jpeg, .png, .webp o .gif"
-              );
-            }
-          },
+    },
+    img: {
+      type: DataTypes.STRING(500),
+      validate: {
+        isUrl: {
+          msg: "Debe ser una URL válida",
+        },
+        isImageUrl(value) {
+          if (value && !/\.(jpg|jpeg|png|webp|gif)$/i.test(value)) {
+            throw new Error(
+              "La URL debe terminar en .jpg, .jpeg, .png, .webp o .gif"
+            );
+          }
         },
       },
-      fenology: {
-        type: DataTypes.TEXT,
-        validate: {
-          len: {
-            args: [0, 500],
-            msg: "La fenología no puede exceder 500 caracteres",
-          },
+    },
+    fenology: {
+      type: DataTypes.TEXT,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: "La fenología no puede exceder 500 caracteres",
         },
       },
     },
   },
+
   {
-    // Opciones adicionales del modelo
-    tableName: "butterflies", // Le decimos a Sequelize que use este nombre exacto para la tabla
-    timestamps: false, // Habilita createdAt y updatedAt automáticamente
-    underscored: true, // Mapea campos como `createdAt` a `created_at` en la BBDD
+    // Segundo objeto que define las opciones adicionales del modelo
+    tableName: "butterflies",
+    timestamps: false, // Sequelize no intentará gestionar las columnas created_at y updated_at para este modelo.
+    underscored: true,
+    hooks: {
+      // Utilidad: normalizar o sanear datos antes de guardarlos para asegurar consistencia.
+      beforeValidate: (butterfly, options) => {
+        if (butterfly.name) {
+          // Pone en mayúscula la primera letra de cada palabra en el nombre
+          butterfly.name = butterfly.name
+            .toLowerCase()
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+        }
+        if (butterfly.family) {
+          butterfly.family = butterfly.family
+            .toLowerCase()
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+        }
+      },
+    },
+    paranoid: true, // Habilita Soft Deletes
+    scopes: {
+      byFamily: (family) => ({
+        //Atajo para hacer consultas por familia
+        where: { family: family },
+      }),
+      simpleView: {
+        //Atajo que devuelve los atributos esenciales
+        attributes: ["id", "name", "family", "img"],
+      },
+      withDeleted: {
+        //Atajo para incluir registros "borrados" (soft deletes) para administradores
+        paranoid: false,
+      },
+    },
   }
 );
 
