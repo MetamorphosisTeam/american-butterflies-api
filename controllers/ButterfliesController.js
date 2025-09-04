@@ -1,10 +1,10 @@
-import Butterfly from "../models/ButterfliesModel.js";
+import ButterfliesModel from "../models/ButterfliesModel.js";
 
 // Obtener todas las mariposas
 export const getAllButterflies = async (req, res) => {
   try {
-    const butterflies = await Butterfly.findAll();
-    res.json(butterflies);
+    const butterflies = await ButterfliesModel.findAll();
+    res.status(butterflies);
   } catch (error) {
     console.error("Error Sequelize en getAllButterflies:", error);
     res.status(500).json({ error: "Error al obtener mariposas" });
@@ -14,7 +14,7 @@ export const getAllButterflies = async (req, res) => {
 // Obtener mariposa por ID
 export const getById = async (req, res) => {
   try {
-    const butterfly = await Butterfly.findByPk(req.params.id);
+    const butterfly = await ButterfliesModel.findByPk(req.params.id);
     
     if (!butterfly) {
       return res.status(404).json({ error: "No encontrada" });
