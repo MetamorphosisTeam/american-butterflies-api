@@ -55,7 +55,7 @@ const ButterfliesModel = db_connection.define('butterflies', {
 }, {
   // Opciones adicionales del modelo
   tableName: 'butterflies', // Le decimos a Sequelize que use este nombre exacto para la tabla
-  timestamps: false, // Habilita createdAt y updatedAt automáticamente, cambiado al false, revisar sic cambiar a true
+  timestamps: false, // Habilita createdAt y updatedAt automáticamente
   underscored: true // Mapea campos como `createdAt` a `created_at` en la BBDD
 });
 
