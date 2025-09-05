@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 
 import butterfliesRouter from "./routes/ButterfliesRoutes.js";
+import adminRouter from "./routes/AdminRoutes.js"; // nuevo router de admin
 import db_connection from "./database/db_connection.js";
 import ButterfliesModel from "./models/ButterfliesModel.js";
 
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 
 // Rutas de la API
 app.use("/butterflies", butterfliesRouter);
+app.use("/admin", adminRouter); // el router de admin con el prefijo /admin
 
 // Conexión a la base de datos
 try {

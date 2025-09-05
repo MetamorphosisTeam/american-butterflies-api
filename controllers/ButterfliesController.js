@@ -86,3 +86,13 @@ export const deleteButterfly = async (req, res) => {
   }
 };
 
+// Esta función usa el scope 'withDeleted' para obtener todos los registros (incluyendo los soft delete). Solo para admins.
+export const getAllButterfliesForAdmin = async (req, res) => {
+  try {
+    const allButterflies = await ButterfliesModel.scope('withDeleted').findAll();
+    res.status(200).json(allButterflies);
+  } catch (error) {
+    console.error("Error getting records for admin:", error);
+    res.status(500).json({ error: "Error al obtener los registros para el administrador" });
+  }
+};

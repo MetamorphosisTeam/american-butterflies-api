@@ -171,16 +171,8 @@ const ButterfliesModel = db_connection.define(
     },
     paranoid: true, // Habilita Soft Deletes
     scopes: {
-      byFamily: (family) => ({
-        //Atajo para hacer consultas por familia
-        where: { family: family },
-      }),
-      simpleView: {
-        //Atajo que devuelve los atributos esenciales
-        attributes: ["id", "name", "family", "img"],
-      },
       withDeleted: {
-        //Atajo para incluir registros "borrados" (soft deletes) para administradores
+        // Atajo para incluir registros "borrados" (soft deletes) para administradores
         paranoid: false,
       },
     },
