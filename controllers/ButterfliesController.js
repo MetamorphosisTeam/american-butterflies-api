@@ -22,12 +22,12 @@ export const createButterfly = async (req, res) => {
             data: newButterfly
         });
     } catch (error) {
-        res.json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const updateButterfly = async (req, res) => {
-
+    
 }
 
 export const deleteButterfly = async (req, res) => {
