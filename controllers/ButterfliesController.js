@@ -1,5 +1,6 @@
 import ButterfliesModel from "../models/ButterfliesModel.js";
 
+
 // Obtener todas las mariposas
 export const getAllButterflies = async (req, res) => {
   try {
