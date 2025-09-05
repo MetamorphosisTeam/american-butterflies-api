@@ -13,7 +13,7 @@ butterfliesRouter.get("/:id", getById);
 butterfliesRouter.post("/", ButterflyValidator, validateFields, createButterfly)
 
 //updateButterfly
-butterfliesRouter.put("/:id", updateButterfly)
+butterfliesRouter.put("/:id", ButterflyValidator, validateFields, updateButterfly)
 
 //deleteButterfly
 butterfliesRouter.delete("/:id", deleteButterfly)
