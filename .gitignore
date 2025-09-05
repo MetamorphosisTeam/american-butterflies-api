@@ -9,7 +9,7 @@ node_modules
 
 # Variables de entorno
 .env
+.env.desarrollo.local
+.env.test.local
+.env.producción.local
 .env.local
-.env.development
-.env.production
-test-env.js
