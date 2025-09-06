@@ -34,7 +34,6 @@ const ButterfliesModel = db_connection.define(
         },
       },
     },
-
     order_name: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -151,7 +150,7 @@ const ButterfliesModel = db_connection.define(
   {
     // Segundo objeto que define las opciones adicionales del modelo
     tableName: "butterflies",
-    timestamps: false, // Sequelize no intentará gestionar las columnas created_at y updated_at para este modelo.
+    timestamps: true, // Sequelize no intentará gestionar las columnas created_at y updated_at para este modelo.
     underscored: true,
     hooks: {
       // Utilidad: normalizar o sanear datos antes de guardarlos para asegurar consistencia.
@@ -170,6 +169,7 @@ const ButterfliesModel = db_connection.define(
       },
     },
     paranoid: true, // Habilita Soft Deletes
+    //deletedAt: "deleted_at",
     scopes: {
       withDeleted: {
         // Atajo para incluir registros "borrados" (soft deletes) para administradores

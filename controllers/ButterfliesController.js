@@ -1,4 +1,5 @@
 import ButterfliesModel from "../models/ButterfliesModel.js";
+import { Op } from "sequelize";
 
 
 // Obtener todas las mariposas
@@ -86,7 +87,9 @@ export const deleteButterfly = async (req, res) => {
   }
 };
 
-// Esta función usa el scope 'withDeleted' para obtener todos los registros (incluyendo los soft delete). Solo para admins.
+
+//-------------------------- SCOPE DELETED BUTTERFLIES: solo para admins---------------------
+// Esta función usa el scope 'withDeleted' para obtener todos los registros (incluyendo los soft delete).
 export const getAllButterfliesForAdmin = async (req, res) => {
   try {
     const allButterflies = await ButterfliesModel.scope('withDeleted').findAll();
@@ -94,5 +97,37 @@ export const getAllButterfliesForAdmin = async (req, res) => {
   } catch (error) {
     console.error("Error getting records for admin:", error);
     res.status(500).json({ error: "Error al obtener los registros para el administrador" });
+  }
+};
+
+
+// Obtener mariposa borrada por ID
+export const getDeletedButterfly = async (req, res) => {
+  try {
+    const butterfly = await ButterfliesModel.scope('withDeleted').findByPk(req.params.id);
+    res.status(200).json(butterfly);
+  } catch (error) {
+    console.error("Error Sequelize en getById:", error);
+    res.status(500).json({ error: "Error al obtener mariposa" });
+  }
+
+}
+
+// Obtener solo mariposas eliminadas (soft deleted)
+export const getDeletedButterflies = async (req, res) => {
+  try {
+    const deleted = await ButterfliesModel.findAll({
+      paranoid: false,
+      where: {
+        deletedAt: {
+          [Op.ne]: null
+        }
+      }
+    });
+
+    res.json(deleted);
+  } catch (error) {
+    console.error("Error al obtener mariposas eliminadas:", error);
+    res.status(500).json({ error: "No se pudieron obtener las mariposas eliminadas" });
   }
 };
