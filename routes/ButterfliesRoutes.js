@@ -7,6 +7,8 @@ const butterfliesRouter = express.Router()
 
 //Get
 butterfliesRouter.get("/", getAllButterflies);
+
+//GetById
 butterfliesRouter.get("/:id", getById);
 
 //createButterfly
