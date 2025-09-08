@@ -17,7 +17,6 @@ export const ButterflyValidator = [
         .bail()
         .trim(),
 
-
     // 2. Validación para 'order': opcional, ya que es de solo lectura en el form.
     check('order', 'El orden debe ser texto.')
         .optional({ checkFalsy: true })
