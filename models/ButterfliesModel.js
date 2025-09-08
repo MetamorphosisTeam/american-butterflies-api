@@ -34,10 +34,12 @@ const ButterfliesModel = db_connection.define(
         },
       },
     },
-    order_name: {
+    order: {
+      // 1.ORDER Este es el nombre que usará la API y el frontend
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: "Lepidoptera",
+      field: "order_name", // 2.ORDER_NAME Este es el nombre REAL de la columna en la base de datos
       validate: {
         isIn: {
           args: [["Lepidoptera"]],
