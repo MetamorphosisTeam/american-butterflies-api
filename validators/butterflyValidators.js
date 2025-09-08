@@ -11,40 +11,28 @@ export const ButterflyValidator = [
         .exists({ checkFalsy: true }) // No debe ser un string vacío ""
         .withMessage('El nombre de la mariposa es obligatorio.')
         .bail()
-        .isLength({ min: 5, max: 100 })
-        .withMessage('El nombre debe tener entre 5 y 100 caracteres.')
-        .bail()
         // Regex mejorado para coincidir con el del frontend
         .matches(/^[A-Za-zÁÉÍÓÚáéíóúüÜñÑ\s().-]+$/)
         .withMessage('El nombre solo puede contener letras, espacios, paréntesis, guiones y puntos.')
         .bail()
-        .custom((value) => {
-            const wordCount = value.trim().split(/\s+/).length;
-            if (wordCount < 2 || wordCount > 5) {
-                throw new Error('El nombre debe contener entre 2 y 5 palabras.');
-            }
-            return true;
-        })
-        .trim()
-        .escape(),
+        .trim(),
+
 
     // 2. Validación para 'order': opcional, ya que es de solo lectura en el form.
     check('order', 'El orden debe ser texto.')
         .optional({ checkFalsy: true })
         .isIn(["Lepidoptera"])
         .withMessage('El orden debe ser "Lepidoptera".')
-        .trim()
-        .escape(),
+        .trim(),
 
     // 3. Validación para 'family': campo obligatorio (viene de un <select>).
     check('family')
         .exists({ checkFalsy: true }) // No debe ser un string vacío ""
         .withMessage('La familia es obligatoria.')
         .bail()
-        .isString()
-        .withMessage('La familia debe ser texto.')
-        .trim()
-        .escape(),
+        .isIn(["Nymphalidae", "Papilionidae","Pieridae", "Lycaenidae", "Hesperiidae","Riodinidae"])
+        .withMessage('La familia seleccionada no es valida.')
+        .trim(),
 
     // 4. Validación para 'img': opcional, pero si existe debe ser una URL de imagen válida.
     check('img')
@@ -55,8 +43,7 @@ export const ButterflyValidator = [
             }
             return true;
         })
-        .trim()
-        .escape(),
+        .trim(),
 
     // 5. Validación genérica para los campos de texto opcionales (textareas).
     ...['origin', 'location', 'color', 'size', 'fenology', 'cycle', 'habitat', 'plants'].map(field =>
@@ -66,6 +53,5 @@ export const ButterflyValidator = [
                 .isLength({ min: 4, max: 500 })
                 .withMessage(`El campo '${field}' debe tener entre 4 y 500 caracteres.`)
                 .trim()
-                .escape()
         ),
 ];
