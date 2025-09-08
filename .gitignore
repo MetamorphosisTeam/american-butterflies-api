@@ -13,3 +13,4 @@ node_modules
 .env.test.local
 .env.producción.local
 .env.local
+test-env.js
