@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache --detectOpenHandles --silent --verbose"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache --detectOpenHandles --silent --verbose",
+    "db:seed": "node seeders/butterflySeeder.js"
   },
   "keywords": [],
   "author": "",
