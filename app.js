@@ -6,13 +6,12 @@ import helmet from "helmet";
 import butterfliesRouter from "./routes/ButterfliesRoutes.js";
 import adminRouter from "./routes/AdminRoutes.js"; // nuevo router de admin
 import db_connection from "./database/db_connection.js";
-import ButterfliesModel from "./models/ButterfliesModel.js";
 
 // Cargar variables de entorno
 dotenv.config();
 
 // Inicializar app una sola vez, sin export
-const app = express();
+export const app = express();
 
 //Middlewares de seguridad
 app.use(helmet());
@@ -46,12 +45,12 @@ try {
   console.error(`❌ Database connection error: ${error}`);
 }
 
-// Levantar servidor
+//Levantar servidor
 const PORT = process.env.PORT || 8000;
 export const server = app.listen(PORT, () => {
   console.log(`🚀 Server up at http://localhost:${PORT}/`);
-}); 
-*/
+}); */
+
 
 // Función para iniciar el servidor
 const startServer = async () => {
