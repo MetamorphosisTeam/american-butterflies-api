@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app, server } from "../app.js";
+import {app} from "../app.js";
 
 describe("Butterflies test CRUD", () => {
   let butterflyId; //variables gloaal,uso: recoger id de mariposa creada
