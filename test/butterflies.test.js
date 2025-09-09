@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../app.js";  // 👈 solo importamos app
+import {app} from "../app.js";
 
 describe("Butterflies test CRUD", () => {
   let butterflyId;

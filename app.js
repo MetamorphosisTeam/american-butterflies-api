@@ -6,13 +6,12 @@ import helmet from "helmet";
 import butterfliesRouter from "./routes/ButterfliesRoutes.js";
 import adminRouter from "./routes/AdminRoutes.js"; // nuevo router de admin
 import db_connection from "./database/db_connection.js";
-import ButterfliesModel from "./models/ButterfliesModel.js";
 
 // Cargar variables de entorno
 dotenv.config();
 
 // Inicializar app una sola vez, sin export
-const app = express();
+export const app = express();
 
 //Middlewares de seguridad
 app.use(helmet());
@@ -36,6 +35,12 @@ app.get("/", (req, res) => {
 app.use("/butterflies", butterfliesRouter);
 app.use("/admin", adminRouter); // el router de admin con el prefijo /admin
 
+
+//Levantar servidor
+const PORT = process.env.PORT || 8000;
+export const server = app.listen(PORT, () => {
+  console.log(`🚀 Server up at http://localhost:${PORT}/`);
+}); 
 
 
 // Función para iniciar el servidor
