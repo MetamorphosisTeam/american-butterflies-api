@@ -35,22 +35,6 @@ app.get("/", (req, res) => {
 app.use("/butterflies", butterfliesRouter);
 app.use("/admin", adminRouter); // el router de admin con el prefijo /admin
 
-/* Conexión a la base de datos
-try {
-  await db_connection.authenticate();
-  console.log('✅ Connected to database 🐱🚀');
-  await ButterfliesModel.sync({}); // Añadido para dar permiso a Squelize a modificar la tabla
-  console.log('✅ Models synchronized ✔');
-} catch (error) {
-  console.error(`❌ Database connection error: ${error}`);
-}
-
-//Levantar servidor
-const PORT = process.env.PORT || 8000;
-export const server = app.listen(PORT, () => {
-  console.log(`🚀 Server up at http://localhost:${PORT}/`);
-}); */
-
 
 // Función para iniciar el servidor
 const startServer = async () => {
@@ -79,6 +63,8 @@ const startServer = async () => {
 
 // Llamamos a la función para que todo se inicie
 startServer();
+
+
 
 
 

@@ -2,13 +2,12 @@ import request from "supertest";
 import {app} from "../app.js";
 
 describe("Butterflies test CRUD", () => {
-  let butterflyId; //variables gloaal,uso: recoger id de mariposa creada
-  let response;  // variable global almacena respuesta de peticion
+  let butterflyId;
+  let response;
 
-  //
-  const butterflyMock = { //campos necesarios para la peticion 
+  const butterflyMock = {
     name: "Mariposa Monarca",
-    order_name: "Lepidoptera",
+    order: "Lepidoptera",
     family: "Nymphalidae",
     color: "Naranja y negro",
     size: "10 cm",
@@ -22,15 +21,14 @@ describe("Butterflies test CRUD", () => {
   };
 
   // POST /butterflies
-  describe("POST /butterflies", () => { //describe("POST /butterflies" agrupa los test que se relacionan con crear mariposas
+  describe("POST /butterflies", () => {
     beforeEach(async () => {
       response = await request(app)
         .post("/butterflies")
         .send(butterflyMock)
-        .set("Accept", "application/json"); // asegura que express reciba el json correctamente
+        .set("Accept", "application/json");
 
       butterflyId = response.body.data?.id;
-      console.log("Created butterfly ID:", butterflyId);
     });
 
     test("should return status 201", () => {
@@ -69,7 +67,7 @@ describe("Butterflies test CRUD", () => {
 
     beforeEach(async () => {
       getByIdResponse = await request(app)
-        .get(`/butterflies/${butterflyId}`) // por eso fallaba
+        .get(`/butterflies/${butterflyId}`)
         .set("Accept", "application/json");
     });
 
@@ -82,4 +80,91 @@ describe("Butterflies test CRUD", () => {
       expect(getByIdResponse.body.name).toBe("Mariposa Monarca");
     });
   });
+
+  // PUT /butterflies/:id
+  describe("PUT /butterflies/:id", () => {
+    let updateResponse;
+    const updatedData = {
+  name: "Mariposa Reina",
+  order: "Lepidoptera",
+  family: "Nymphalidae",
+  color: "Naranja, negro y blanco",
+  size: "12 cm",
+  origin: "Centroamérica",
+  location: "Guatemala",
+  habitat: "Bosques tropicales",
+  plants: "Asclepias",
+  cycle: "Completo",
+  img: "https://ejemplo.com/reina.jpg",
+  fenology: "Reproducción estacional"
+};
+    beforeEach(async () => {
+      updateResponse = await request(app)
+        .put(`/butterflies/${butterflyId}`)
+        .send(updatedData)
+        .set("Accept", "application/json");
+    });
+
+    test("should return status 200", () => {
+      expect(updateResponse.status).toBe(200);
+    });
+
+    test("should update the butterfly correctly", () => {
+      expect(updateResponse.body.data).toHaveProperty("id", butterflyId);
+      expect(updateResponse.body.data.name).toBe("Mariposa Reina");
+      expect(updateResponse.body.data.color).toBe("Naranja, negro y blanco");
+    });
+  });
+
+ // DELETE /butterflies/:id
+describe("DELETE /butterflies/:id", () => {
+  let deleteResponse;
+  let butterflyToDelete;
+
+  beforeEach(async () => {
+    // Crear mariposa temporal
+    const createResponse = await request(app)
+      .post("/butterflies")
+      .send({
+        name: "Mariposa Temporal",
+        order: "Lepidoptera",
+        family: "Nymphalidae",
+        color: "Azul y negro",
+        size: "8 cm",
+        origin: "América del Sur",
+        location: "Brasil",
+        habitat: "Selva",
+        plants: "Passiflora",
+        cycle: "Completo",
+        img: "https://ejemplo.com/temp.jpg",
+        fenology: "Estacional"
+      })
+      .set("Accept", "application/json");
+
+    butterflyToDelete = createResponse.body.data.id;
+
+    // Eliminar mariposa creada
+    deleteResponse = await request(app)
+      .delete(`/butterflies/${butterflyToDelete}`)
+      .set("Accept", "application/json");
+  });
+
+  test("should return status 200", () => {
+    expect(deleteResponse.status).toBe(200);
+  });
+
+  test("should return success message", () => {
+    expect(deleteResponse.body.ok).toBe(true);
+    expect(deleteResponse.body.msg).toBe("Mariposa eliminada correctamente");
+  });
+
+  test("should not find butterfly after delete", async () => {
+    const checkResponse = await request(app)
+      .get(`/butterflies/${butterflyToDelete}`)
+      .set("Accept", "application/json");
+
+    expect(checkResponse.status).toBe(404);
+  });
+});
+
 });

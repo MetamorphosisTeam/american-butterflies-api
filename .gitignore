@@ -1,5 +1,5 @@
-node_modules
 
+node_modules
 
 # macOS system files
 .DS_Store
@@ -7,7 +7,7 @@ node_modules
 .DS_Store?
 ._*
 
-# Variables de entorno
+# archivos de variables de entorno dotenv
 .env
 .env.desarrollo.local
 .env.test.local

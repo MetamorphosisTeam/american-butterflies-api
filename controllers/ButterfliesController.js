@@ -78,7 +78,7 @@ export const deleteButterfly = async (req, res) => {
             msg: "Mariposa eliminada correctamente"
         });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ ok: false,message: error.message });
     }
 };
 
@@ -123,6 +123,6 @@ export const getDeletedButterflies = async (req, res) => {
     res.json(deleted);
   } catch (error) {
     console.error("Error al obtener mariposas eliminadas:", error);
-    res.status(500).json({ error: "No se pudieron obtener las mariposas eliminadas" });
+    res.status(500).json({ error: "No se pudieron obtener las mariposas eliminadas"});
   }
 };
