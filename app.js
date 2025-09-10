@@ -36,13 +36,6 @@ app.use("/butterflies", butterfliesRouter);
 app.use("/admin", adminRouter); // el router de admin con el prefijo /admin
 
 
-//Levantar servidor
-const PORT = process.env.PORT || 8000;
-export const server = app.listen(PORT, () => {
-  console.log(`🚀 Server up at http://localhost:${PORT}/`);
-}); 
-
-
 // Función para iniciar el servidor
 const startServer = async () => {
   try {

@@ -7,7 +7,7 @@ describe("Butterflies test CRUD", () => {
 
   const butterflyMock = {
     name: "Mariposa Monarca",
-    order_name: "Lepidoptera",
+    order: "Lepidoptera",
     family: "Nymphalidae",
     color: "Naranja y negro",
     size: "10 cm",
@@ -85,10 +85,19 @@ describe("Butterflies test CRUD", () => {
   describe("PUT /butterflies/:id", () => {
     let updateResponse;
     const updatedData = {
-      name: "Mariposa Reina",
-      color: "Naranja, negro y blanco"
-    };
-
+  name: "Mariposa Reina",
+  order: "Lepidoptera",
+  family: "Nymphalidae",
+  color: "Naranja, negro y blanco",
+  size: "12 cm",
+  origin: "Centroamérica",
+  location: "Guatemala",
+  habitat: "Bosques tropicales",
+  plants: "Asclepias",
+  cycle: "Completo",
+  img: "https://ejemplo.com/reina.jpg",
+  fenology: "Reproducción estacional"
+};
     beforeEach(async () => {
       updateResponse = await request(app)
         .put(`/butterflies/${butterflyId}`)
@@ -107,31 +116,55 @@ describe("Butterflies test CRUD", () => {
     });
   });
 
-  // DELETE /butterflies/:id
-  describe("DELETE /butterflies/:id", () => {
-    let deleteResponse;
+ // DELETE /butterflies/:id
+describe("DELETE /butterflies/:id", () => {
+  let deleteResponse;
+  let butterflyToDelete;
 
-    beforeEach(async () => {
-      deleteResponse = await request(app)
-        .delete(`/butterflies/${butterflyId}`)
-        .set("Accept", "application/json");
-    });
+  beforeEach(async () => {
+    // Crear mariposa temporal
+    const createResponse = await request(app)
+      .post("/butterflies")
+      .send({
+        name: "Mariposa Temporal",
+        order: "Lepidoptera",
+        family: "Nymphalidae",
+        color: "Azul y negro",
+        size: "8 cm",
+        origin: "América del Sur",
+        location: "Brasil",
+        habitat: "Selva",
+        plants: "Passiflora",
+        cycle: "Completo",
+        img: "https://ejemplo.com/temp.jpg",
+        fenology: "Estacional"
+      })
+      .set("Accept", "application/json");
 
-    test("should return status 200", () => {
-      expect(deleteResponse.status).toBe(200);
-    });
+    butterflyToDelete = createResponse.body.data.id;
 
-    test("should return success message", () => {
-      expect(deleteResponse.body.ok).toBe(true);
-      expect(deleteResponse.body.msg).toBe("Mariposa eliminada correctamente");
-    });
-
-    test("should not find butterfly after delete", async () => {
-      const checkResponse = await request(app)
-        .get(`/butterflies/${butterflyId}`)
-        .set("Accept", "application/json");
-
-      expect(checkResponse.status).toBe(404);
-    });
+    // Eliminar mariposa creada
+    deleteResponse = await request(app)
+      .delete(`/butterflies/${butterflyToDelete}`)
+      .set("Accept", "application/json");
   });
+
+  test("should return status 200", () => {
+    expect(deleteResponse.status).toBe(200);
+  });
+
+  test("should return success message", () => {
+    expect(deleteResponse.body.ok).toBe(true);
+    expect(deleteResponse.body.msg).toBe("Mariposa eliminada correctamente");
+  });
+
+  test("should not find butterfly after delete", async () => {
+    const checkResponse = await request(app)
+      .get(`/butterflies/${butterflyToDelete}`)
+      .set("Accept", "application/json");
+
+    expect(checkResponse.status).toBe(404);
+  });
+});
+
 });
