@@ -30,8 +30,8 @@ La arquitectura sigue el patrón **MVC (Modelo - Vista - Controlador)**:
 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/tu-repositorio.git
-   cd tu-repositorio
+   git clone https://github.com/MetamorphosisTeam/american-butterflies-api.git
+   cd american-butterflies-api
 ##Instalar las dependencias:
 npm install
 
