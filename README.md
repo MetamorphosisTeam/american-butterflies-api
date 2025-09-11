@@ -41,6 +41,18 @@ DB_PASSWORD=tu_contraseña
 DB_NAME=mariposas_db
 PORT=3000
 
+Archivo .env.example y configuración de entorno
+
+El proyecto incluye un archivo llamado .env.example que sirve como plantilla para definir las variables de entorno necesarias para que la API funcione correctamente. Este archivo no debe ser modificado directamente, sino copiado como .env en la raíz del proyecto:
+
+cp .env.example .env
+
+Luego, edita el archivo .env con tus propias credenciales de base de datos y configuración personalizada.
+
+⚠️ Nota sobre el puerto:
+El valor de PORT es opcional. Si no se define, el servidor usará el puerto por defecto 3000.
+Sin embargo, en este proyecto se ha estandarizado el uso del puerto 8000 para mantener coherencia entre los entornos de desarrollo y pruebas.
+
 ##Configurar la base de datos:
 
 Usar MySQL Workbench para crear la base de datos.
