@@ -13,7 +13,6 @@ Este proyecto es una API RESTful desarrollada con **Node.js**, **Express**, y **
 - **Jest + Supertest** (Testing)
 - **Express-validator** (Validación y sanitización)
 - **dotenv** (Variables de entorno)
-- **GitHub Actions** (CI/CD)
 - **ESLint + Prettier** (Linting & Formateo de código)
 - **dbdiagram.io** (Diseño de base de datos)
 
@@ -86,10 +85,6 @@ Validación de datos de entrada
 Sanitización
 
 Reutilización de middlewares
-
-CI/CD con GitHub Actions
-
-Se configuró GitHub Actions para correr los tests automáticamente en cada push y pull request, ayudando a mantener la calidad del código y prevenir errores en producción.
 
 ##Requisitos para el frontend
 
