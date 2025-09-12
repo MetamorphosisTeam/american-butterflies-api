@@ -37,7 +37,7 @@ const ButterfliesModel = db_connection.define(
     order: {
       // 1.ORDER Este es el nombre que usará la API y el frontend
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
       defaultValue: "Lepidoptera",
       field: "order_name", // 2.ORDER_NAME Este es el nombre REAL de la columna en la base de datos
       validate: {
@@ -60,80 +60,85 @@ const ButterfliesModel = db_connection.define(
       type: DataTypes.STRING(150),
       allowNull: false,
       validate: {
-        len: {
-          args: [4, 150],
-          msg: "El color debe tener entre 4 y 150 caracteres",
+        len(value) {
+          if (value && value.length > 150) {
+            throw new Error("El color no puede exceder 150 caracteres");
+          }//agregado para que coincida con las validaciones del front
         },
       },
     },
     size: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       validate: {
-        len: {
-          args: [2, 20],
-          msg: "El tamaño debe tener entre 2 y 20 caracteres",
+        len(value) {
+          if (value && value.length > 20) {
+            throw new Error("El tamaño no puede exceder 20 caracteres");
+          }
         },
       },
     },
     origin: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
       validate: {
-        len: {
-          args: [4, 100],
-          msg: "El origen debe tener entre 4 y 100 caracteres",
+        len(value) {
+          if (value && value.length > 100) {
+            throw new Error("El origen no puede exceder 100 caracteres");
+          }
         },
       },
     },
     location: {
       type: DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: true,
       validate: {
-        len: {
-          args: [4, 200],
-          msg: "La ubicación debe tener entre 4 y 200 caracteres",
+        len(value) {
+          if (value && value.length > 200) {
+            throw new Error("La ubicación no puede exceder 200 caracteres");
+          }
         },
       },
     },
     habitat: {
       type: DataTypes.TEXT,
       validate: {
-        len: {
-          args: [0, 500],
-          msg: "El hábitat no puede exceder 500 caracteres",
+        len(value) {
+          if (value && value.length > 500) {
+            throw new Error("El hábitat no puede exceder 500 caracteres");
+          }
         },
       },
     },
     plants: {
       type: DataTypes.TEXT,
       validate: {
-        len: {
-          args: [0, 500],
-          msg: "Las plantas no pueden exceder 500 caracteres",
+        len(value) {
+          if (value && value.length > 500) {
+            throw new Error("Las plantas no pueden exceder 500 caracteres");
+          }
         },
       },
     },
     cycle: {
       type: DataTypes.TEXT,
       validate: {
-        len: {
-          args: [0, 500],
-          msg: "El ciclo no puede exceder 500 caracteres",
+        len(value) {
+          if (value && value.length > 500) {
+            throw new Error("El ciclo no puede exceder 500 caracteres");
+          }
         },
       },
     },
     img: {
       type: DataTypes.STRING(500),
+      allowNull: true,
       validate: {
-        isUrl: {
-          msg: "Debe ser una URL válida",
-        },
-        isImageUrl(value) {
-          if (value && !/\.(jpg|jpeg|png|webp|gif)$/i.test(value)) {
-            throw new Error(
-              "La URL debe terminar en .jpg, .jpeg, .png, .webp o .gif"
-            );
+        isUrlOrEmpty(value) {
+          if (value === null || value === "") return; // ✅ no valida si está vacío
+          const urlRegex = /^https?:\/\/.*\.(jpg|jpeg|png|webp|gif)$/i;
+          if (!urlRegex.test(value)) {
+            throw new Error("Debe ser una URL válida y terminar en .jpg, .jpeg, .png, .webp o .gif");
           }
         },
       },
@@ -141,9 +146,10 @@ const ButterfliesModel = db_connection.define(
     fenology: {
       type: DataTypes.TEXT,
       validate: {
-        len: {
-          args: [0, 500],
-          msg: "La fenología no puede exceder 500 caracteres",
+        len(value) {
+          if (value && value.length > 500) {
+            throw new Error("La fenología no puede exceder 500 caracteres");
+          }
         },
       },
     },
