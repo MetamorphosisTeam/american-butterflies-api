@@ -88,7 +88,7 @@ Actualiza una mariposa existente.
 
 Elimina una mariposa por su ID.
 
-Validación y seguridad
+## Validación y seguridad
 
 Se utiliza express-validator para:
 
@@ -136,11 +136,11 @@ npm run db:seed
 
 Este script ejecuta el archivo butterflySeeder.js en la carpeta seeders para cargar datos de ejemplo en la base de datos. Es útil para tener datos iniciales para pruebas y desarrollo.
 
-🛡️ Middlewares de seguridad y utilidad
+## 🛡️ Middlewares de seguridad y utilidad
 
 En el proyecto se utilizan algunas herramientas clave para mejorar la seguridad y la utilidad de la API. Helmet se usa para proteger la aplicación contra vulnerabilidades comunes configurando cabeceras HTTP de manera automática. Además, se ha habilitado CORS (Cross-Origin Resource Sharing) para gestionar qué dominios pueden acceder a los recursos de la API.
 
-📦 Dependencias principales
+## 📦 Dependencias principales
 
 El proyecto utiliza varias dependencias clave para el manejo del servidor, base de datos y validación de datos. Entre las principales se encuentran:
 
@@ -158,7 +158,7 @@ helmet: Middleware para proteger la aplicación contra vulnerabilidades web medi
 
 cors: Middleware que permite gestionar permisos para solicitudes entre dominios (CORS).
 
-🧪 Dependencias de desarrollo
+## 🧪 Dependencias de desarrollo
 
 Además de las dependencias principales, el proyecto incluye algunas dependencias de desarrollo, como:
 
