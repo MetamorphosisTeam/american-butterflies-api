@@ -31,7 +31,7 @@ La arquitectura sigue el patrón **MVC (Modelo - Vista - Controlador)**:
    ```bash
    git clone https://github.com/MetamorphosisTeam/american-butterflies-api.git
    cd american-butterflies-api
-##Instalar las dependencias:
+## Instalar las dependencias:
 npm install
 
 crea un archivo .env con variables necesarias
@@ -53,7 +53,7 @@ Luego, edita el archivo .env con tus propias credenciales de base de datos y con
 El valor de PORT es opcional. Si no se define, el servidor usará el puerto por defecto 3000.
 Sin embargo, en este proyecto se ha estandarizado el uso del puerto 8000 para mantener coherencia entre los entornos de desarrollo y pruebas.
 
-##Configurar la base de datos:
+## Configurar la base de datos:
 
 Usar MySQL Workbench para crear la base de datos.
 
@@ -61,7 +61,7 @@ Ejecutar las migraciones y seeders si existen.
 
 El esquema relacional fue diseñado y documentado en dbdiagram.io.
 
-##Testing
+## Testing
 
 Se usa Jest y Supertest para testear endpoints y lógica del backend.
 
@@ -98,9 +98,26 @@ Sanitización
 
 Reutilización de middlewares
 
-##Requisitos para el frontend
+## Requisitos para el frontend
 
 Se analizaron los requerimientos del frontend construido con React para determinar los datos que la API debía exponer, y se documentaron en los endpoints anteriores.
+
+## 📬 Documentación de la API (Postman)
+
+Hemos preparado una colección de Postman que contiene todos los endpoints de la API para facilitar su prueba y exploración.
+
+🔗 [Ver colección en Postman](https://documenter.getpostman.com/view/46421761/2sB3HnKzqn)
+
+Puedes importar esta colección en tu Postman o acceder directamente al enlace para ver detalles como:
+
+- Rutas disponibles (GET, POST, PUT, DELETE)
+- Cuerpos de petición (`body`) con ejemplos
+- Respuestas esperadas
+- Validaciones activas
+- Mensajes de error
+
+> ⚠️ Asegúrate de tener tu servidor corriendo en el puerto configurado (por defecto `8000`) antes de hacer pruebas.
+
 
 ## 🔧 Scripts útiles
 
