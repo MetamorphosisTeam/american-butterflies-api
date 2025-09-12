@@ -162,5 +162,5 @@ Este proyecto fue desarrollado por un equipo de cinco mujeres apasionadas por la
 | Sofia Reyes          | [@Sofiareyes12](https://github.com/Sofiareyes12)         | [sofia reyes](https://www.linkedin.com/in/usuario)                      |
 | Michelle Gelvez      | [@MichelleGel](https://github.com/MichelleGel)           | [michelle gelves](https://www.linkedin.com/in/michelle-gelves-390503356)|
 | Olga Ramírez         | [@olgararo](https://github.com/olgararo)                 | [olga ramirez rodríguez](https://www.linkedin.com/in/olga-ramirez-rodriguez) |
-| Gabriela Hernández   | [@gabriela-her](https://github.com/gabriela-her)         | [gabriela-hernandez](https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
+| Gabriela Hernández   | [@gabriela-her](https://github.com/gabriela-her)         | [gabriela hernandez](https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
 | Ingrid Martínez      | [@ingridD2707](https://github.com/ingridD2707)           | [ingrid martinez](https://www.linkedin.com/in/ingrid-m/)                        |
