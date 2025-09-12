@@ -157,10 +157,10 @@ sequelize-cli: Herramienta de línea de comandos que facilita la gestión de mod
 
 Este proyecto fue desarrollado por un equipo de cinco mujeres apasionadas por la tecnología, la naturaleza y el desarrollo de software. Cada una aportó habilidades únicas en backend, frontend, documentación, testing y diseño de base de datos. 💙🦋
 
-| Nombre                      | GitHub                                       | LinkedIn                                      |
-|-----------------------|-----------------------------|----------------------------------------------|-----------------------------------------------|
-| Sofia Reyes   | [@Sofiareyes12](https://github.com/Sofiareyes12) | [sofiareyes12](https://www.linkedin.com/in/usuario) |
-| Michelle Gelvez  | [@MichelleGel](https://github.com/MichelleGel) | [michelle-gelves-390503356](https://www.linkedin.com/in/michelle-gelves-390503356 ) |
-| Olga Ramirez  |  [@olgararo ](https://github.com/olgararo) | [olga-ramirez-rodriguez](https://www.linkedin.com/in/olga-ramirez-rodriguez) |
-|Gabriela Hernandez  | [@gabriela-her](https://github.com/gabriela-her) | (https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
-| Ingrid Martinez  | [@ingridD2707](https://github.com/ingridD2707) | [ingrid-m](https://www.linkedin.com/in/ingrid-m/) 
+| Nombre               | GitHub                                                   | LinkedIn                                                                 |
+|----------------------|----------------------------------------------------------|--------------------------------------------------------------------------|
+| Sofia Reyes          | [@Sofiareyes12](https://github.com/Sofiareyes12)         | [sofiareyes12](https://www.linkedin.com/in/usuario)                      |
+| Michelle Gelvez      | [@MichelleGel](https://github.com/MichelleGel)           | [michelle-gelves](https://www.linkedin.com/in/michelle-gelves-390503356)|
+| Olga Ramírez         | [@olgararo](https://github.com/olgararo)                 | [olga ramirez rodríguez](https://www.linkedin.com/in/olga-ramirez-rodriguez) |
+| Gabriela Hernández   | [@gabriela-her](https://github.com/gabriela-her)         | [gabriela-hernandez](https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
+| Ingrid Martínez      | [@ingridD2707](https://github.com/ingridD2707)           | [ingrid-m](https://www.linkedin.com/in/ingrid-m/)                        |
