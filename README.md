@@ -1,6 +1,6 @@
 # 🦋 API de Mariposas Americanas
 
-Este proyecto es una API RESTful desarrollada con **Node.js**, **Express**, y **Sequelize**, conectada a una base de datos **MySQL**. Forma parte de una arquitectura backend que sirve datos a una aplicación frontend construida con React. La API gestiona datos de mariposas americanas, permitiendo operaciones CRUD completas, validación, paginación, y manejo robusto de errores.
+Este proyecto es una API RESTful desarrollada con **Node.js**, **Express**, y **Sequelize**, conectada a una base de datos **MySQL**. Forma parte de una arquitectura backend que sirve datos a una aplicación frontend construida con React. La API gestiona datos de mariposas americanas, permitiendo operaciones CRUD completas, validación y manejo robusto de errores.
 
 ---
 
@@ -61,6 +61,8 @@ Ejecutar las migraciones y seeders si existen.
 
 El esquema relacional fue diseñado y documentado en dbdiagram.io.
 
+![Tabla Butterflies Schema](./images/tabla_butterflies_bbdd.png)
+
 ## Testing
 
 Se usa Jest y Supertest para testear endpoints y lógica del backend.
@@ -70,7 +72,7 @@ para correr los test: npm test
 Endpoints de la API
 ✔️ GET /api/americanbutterflies
 
-Obtiene una lista paginada de mariposas.
+Obtiene una lista de mariposas.
 
 ✔️ GET /api/americanbutterflies/:id
 
