@@ -16,7 +16,7 @@ Este proyecto es una API RESTful desarrollada con **Node.js**, **Express**, y **
 - **ESLint + Prettier** (Linting & Formateo de código)
 - **dbdiagram.io** (Diseño de base de datos)
 
-![alt text](image-1.png)
+
 ---
 
 ## 📁 Estructura del proyecto
