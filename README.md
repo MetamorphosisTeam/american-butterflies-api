@@ -29,24 +29,26 @@ La arquitectura sigue el patrón **MVC (Modelo - Vista - Controlador)**:
 ## ⚙️ Configuración del proyecto
 
 1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/MetamorphosisTeam/american-butterflies-api.git
-   cd american-butterflies-api
-## Instalar las dependencias:
-npm install
 
-crea un archivo .env con variables necesarias
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_contraseña
-DB_NAME=mariposas_db
-PORT=3000
+ ```bash
+ git clone https://github.com/MetamorphosisTeam/american-butterflies-api.git
+ cd american-butterflies-api
+  ```
+2. Instalar las dependencias:
+  ```bash
+  npm install
+  ```
 
-Archivo .env.example y configuración de entorno
-
-El proyecto incluye un archivo llamado .env.example que sirve como plantilla para definir las variables de entorno necesarias para que la API funcione correctamente. Este archivo no debe ser modificado directamente, sino copiado como .env en la raíz del proyecto:
-
-cp .env.example .env
+3. Configuración de Entorno
+ - Crea un archivo .env con variables necesarias, utiliza el archivo .env.example para esto.
+  ```bash
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=tu_contraseña
+  DB_NAME=mariposas_db
+  PORT=3000
+  ```
+El proyecto incluye un archivo llamado .env.example que sirve como plantilla para definir las variables de entorno necesarias para que la API funcione correctamente. Este archivo no debe ser modificado directamente, sino copiado como .env en la raíz del proyecto
 
 Luego, edita el archivo .env con tus propias credenciales de base de datos y configuración personalizada.
 
@@ -54,13 +56,17 @@ Luego, edita el archivo .env con tus propias credenciales de base de datos y con
 El valor de PORT es opcional. Si no se define, el servidor usará el puerto por defecto 3000.
 Sin embargo, en este proyecto se ha estandarizado el uso del puerto 8000 para mantener coherencia entre los entornos de desarrollo y pruebas.
 
-## Configurar la base de datos:
+4. Configurar la base de datos:
 
 Usar MySQL Workbench para crear la base de datos.
-
-Ejecutar las migraciones y seeders si existen.
+Ejecutar las migraciones y seeders.
+  ```bash
+  npm run db:seed
+  ```
+## Esquema Grafico
 
 El esquema relacional fue diseñado y documentado en dbdiagram.io.
+img
 
 ![Tabla Butterflies Schema](./images/tabla_butterflies_bbdd.png)
 
@@ -68,40 +74,39 @@ El esquema relacional fue diseñado y documentado en dbdiagram.io.
 
 Se usa Jest y Supertest para testear endpoints y lógica del backend.
 
-Los tests están ubicados en la carpeta /tests.
-para correr los test: npm test 
-Endpoints de la API
-✔️ GET /api/americanbutterflies
+Los tests están ubicados en la carpeta /tests. Para correr los test:
+  ```bash
+  npm test
 
-Obtiene una lista de mariposas.
+  Endpoints de la API:
 
-✔️ GET /api/americanbutterflies/:id
+  ✔️ GET /api/americanbutterflies
+  Obtiene una lista de mariposas.
 
-Obtiene una mariposa por ID.
+  ✔️ GET /api/americanbutterflies/:id
+  Obtiene una mariposa por ID.
+ 
+  ✔️ POST /api/americanbutterflies
+  Crea una nueva mariposa.
 
-✔️ POST /api/americanbutterflies
+  ✔️ PUT /api/americanbutterflies/:id
+  Actualiza una mariposa existente.
 
-Crea una nueva mariposa.
-
-✔️ PUT /api/americanbutterflies/:id
-
-Actualiza una mariposa existente.
-
-✔️ DELETE /api/americanbutterflies/:id
-
-Elimina una mariposa por su ID.
+  ✔️ DELETE /api/americanbutterflies/:id
+  Elimina una mariposa por su ID.
+  ```
 
 ## Validación y seguridad
 
 Se utiliza express-validator para:
 
-Validación de datos de entrada
+ - Validación de datos de entrada
 
-Sanitización
+ - Sanitización
 
-Reutilización de middlewares
+ - Reutilización de middlewares
 
-## Requisitos para el frontend
+## Requisitos para el Frontend
 
 Se analizaron los requerimientos del frontend construido con React para determinar los datos que la API debía exponer, y se documentaron en los endpoints anteriores.
 
@@ -128,15 +133,15 @@ En el archivo `package.json` se incluyen algunos scripts útiles para el desarro
 
 Para ejecutar los tests en modo `watch`, puedes usar el siguiente comando:
 
-
+```bash
 npm test
-
-Este comando ejecuta los tests en modo continuo, con watchAll para mantener los tests activos mientras desarrollas. También se desactiva el caché de Jest con --no-cache, se detectan handles abiertos con --detectOpenHandles, y la salida se presenta en modo detallado con --verbose.
+```
+Este comando ejecuta los tests en modo continuo, con _watchAll_ para mantener los tests activos mientras desarrollas. También se desactiva el caché de Jest con _--no-cache_, se detectan handles abiertos con _--detectOpenHandles_, y la salida se presenta en modo detallado con _--verbose_.
 
 Otro script útil es para ejecutar el seed de datos (mariposas) en la base de datos, utilizando el siguiente comando:
-
+```bash
 npm run db:seed
-
+```
 Este script ejecuta el archivo butterflySeeder.js en la carpeta seeders para cargar datos de ejemplo en la base de datos. Es útil para tener datos iniciales para pruebas y desarrollo.
 
 ## 🛡️ Middlewares de seguridad y utilidad
@@ -147,31 +152,31 @@ En el proyecto se utilizan algunas herramientas clave para mejorar la seguridad 
 
 El proyecto utiliza varias dependencias clave para el manejo del servidor, base de datos y validación de datos. Entre las principales se encuentran:
 
-express: Framework de Node.js utilizado para manejar rutas, middleware y el servidor HTTP.
+**express**: Framework de Node.js utilizado para manejar rutas, middleware y el servidor HTTP.
 
-sequelize: ORM que facilita la interacción con la base de datos relacional (en este caso, MySQL).
+**sequelize**: ORM que facilita la interacción con la base de datos relacional (en este caso, MySQL).
 
-mysql2: Driver que conecta Sequelize con la base de datos MySQL.
+**mysql2**: Driver que conecta Sequelize con la base de datos MySQL.
 
-express-validator: Middleware que permite validar y sanitizar los datos de las peticiones HTTP.
+**express-validator**: Middleware que permite validar y sanitizar los datos de las peticiones HTTP.
 
-dotenv: Permite cargar las variables de entorno desde un archivo .env.
+**dotenv**: Permite cargar las variables de entorno desde un archivo .env.
 
-helmet: Middleware para proteger la aplicación contra vulnerabilidades web mediante cabeceras HTTP seguras.
+**helmet**: Middleware para proteger la aplicación contra vulnerabilidades web mediante cabeceras HTTP seguras.
 
-cors: Middleware que permite gestionar permisos para solicitudes entre dominios (CORS).
+**cors**: Middleware que permite gestionar permisos para solicitudes entre dominios (CORS).
 
 ## 🧪 Dependencias de desarrollo
 
 Además de las dependencias principales, el proyecto incluye algunas dependencias de desarrollo, como:
 
-jest: Framework de testing para pruebas unitarias y de integración en JavaScript.
+**jest**: Framework de testing para pruebas unitarias y de integración en JavaScript.
 
-supertest: Utilizado para realizar pruebas HTTP sobre los endpoints de la API de Express.
+**supertest**: Utilizado para realizar pruebas HTTP sobre los endpoints de la API de Express.
 
-cross-env: Permite establecer variables de entorno de manera compatible en diferentes sistemas operativos.
+**cross-env**: Permite establecer variables de entorno de manera compatible en diferentes sistemas operativos.
 
-sequelize-cli: Herramienta de línea de comandos que facilita la gestión de modelos, migraciones y seeders de Sequelize.
+**sequelize-cli**: Herramienta de línea de comandos que facilita la gestión de modelos, migraciones y seeders de Sequelize.
 
 ## 👩‍💻 Integrantes del Proyecto
 
@@ -179,8 +184,8 @@ Este proyecto fue desarrollado por un equipo de cinco mujeres apasionadas por la
 
 | Nombre               | GitHub                                                   | LinkedIn                                                                 |
 |----------------------|----------------------------------------------------------|--------------------------------------------------------------------------|
-| Sofia Reyes          | [@Sofiareyes12](https://github.com/Sofiareyes12)         | [sofia reyes](https://www.linkedin.com/in/usuario)                      |
-| Michelle Gelvez      | [@MichelleGel](https://github.com/MichelleGel)           | [michelle gelves](https://www.linkedin.com/in/michelle-gelves-390503356)|
-| Olga Ramírez         | [@olgararo](https://github.com/olgararo)                 | [olga ramirez rodríguez](https://www.linkedin.com/in/olga-ramirez-rodriguez) |
-| Gabriela Hernández   | [@gabriela-her](https://github.com/gabriela-her)         | [gabriela hernandez](https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
-| Ingrid Martínez      | [@ingridD2707](https://github.com/ingridD2707)           | [ingrid martinez](https://www.linkedin.com/in/ingrid-m/)                        |
+| Sofia Reyes          | [@Sofiareyes12](https://github.com/Sofiareyes12)         | [Sofia Reyes](https://www.linkedin.com/in/usuario)                      |
+| Michelle Gelves      | [@MichelleGel](https://github.com/MichelleGel)           | [Michelle Gelves](https://www.linkedin.com/in/michelle-gelves-390503356)|
+| Olga Ramírez         | [@olgararo](https://github.com/olgararo)                 | [Olga Ramirez](https://www.linkedin.com/in/olga-ramirez-rodriguez) |
+| Gabriela Hernández   | [@gabriela-her](https://github.com/gabriela-her)         | [Gabriela Hernandez](https://www.linkedin.com/in/arianna-gabriela-hernandez-berbesi-67aa491b3/) |
+| Ingrid Martínez      | [@ingridD2707](https://github.com/ingridD2707)           | [Ingrid Martinez](https://www.linkedin.com/in/ingrid-m/)                        |
